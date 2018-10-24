@@ -32,10 +32,11 @@ class BloodPressureEntrySheetController @Inject constructor(
     val replayedEvents = events.compose(ReportAnalyticsEvents()).replay().refCount()
 
     return Observable.merge(
-        automaticDiastolicFocusChanges(replayedEvents),
-        validationErrorResets(replayedEvents),
+//        automaticDiastolicFocusChanges(replayedEvents),
+//        validationErrorResets(replayedEvents),
         prefillWhenUpdatingABloodPressure(replayedEvents),
-        bpValidationsAndSaves(replayedEvents))
+        bpValidationsAndSaves(replayedEvents)
+    )
   }
 
   private fun automaticDiastolicFocusChanges(events: Observable<UiEvent>): Observable<UiChange> {

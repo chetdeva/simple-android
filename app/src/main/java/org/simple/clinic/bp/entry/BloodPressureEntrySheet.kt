@@ -19,6 +19,7 @@ import org.simple.clinic.R
 import org.simple.clinic.activity.TheActivity
 import org.simple.clinic.widgets.BottomSheetActivity
 import org.simple.clinic.widgets.UiEvent
+import timber.log.Timber
 import java.util.UUID
 import javax.inject.Inject
 
@@ -88,7 +89,7 @@ class BloodPressureEntrySheet : BottomSheetActivity() {
   private fun sheetCreates(): Observable<UiEvent> {
     val patientUuid = intent.extras!!.getSerializable(KEY_UUID) as UUID
     val openAs = intent.extras!!.getSerializable(KEY_OPEN_AS) as OpenAs
-    return Observable.just(BloodPressureEntrySheetCreated(openAs, patientUuid))
+    return Observable.fromCallable { BloodPressureEntrySheetCreated(openAs, patientUuid) }
   }
 
   private fun systolicTextChanges() = RxTextView.textChanges(systolicEditText)
